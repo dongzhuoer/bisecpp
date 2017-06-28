@@ -1,73 +1,43 @@
-# to do: all sum((x-mean)^2) should be sum(x^2) - sum(x)^2 / n
-
-
-
-#' Title
+#' @title decimal to base-n
 #'
-#' @param data numeric matrix. `data[,1]` gives \eqn{x} and `data[,2]` gives
-#'   \eqn{y}
-#' @param ff function. `ff(para, extra)` gives the function `f()` that
-#'   \eqn{y=f(x)}
-#' @param space numeric matrix. \eqn{n*2*m} matirx, \eqn{n} is the number of
-#'   parameters to fit, \eqn{m} is the number of ranges. `space[i,1,j]` and
-#'   `space[i,2,j]` gives the min and max value of ith parameter in jth range
-#'   respectively.
-data_ff_space <- function() {}
-
-
-
-#' Title
+#' @description transform decimal integer to other number mode, such as binary
+#'   (`radix = 2`)
 #'
-#' @param extra usually numeric. see \code{ff}
-#' @param partition integer scalar. how partitions are the original range
-#'   divided per parameter.
-extra_partition <- function() {}
-
-
-
-#' Title
+#' @param x integer scalar. The number to transform
+#' @param radix integer scalar. radix of the target number, \eqn{2} for binary,
+#'   \eqn{8} for octal, etc.
+#' @param n.digit integer scalar. how many digits the result contains, unused
+#'   uppper digits are filled by \eqn{0}
 #'
-#' @param trim integer scalar. determine what proportion of total subranges will
-#'   be reserved for the next round of partition.
-#' @param enlarge integer scalar. how many times is the selected subrange
-#'   enlarged before the next round of partition.
-trim_enlarge <- function() {}
-
-
-
-#' Title
-#'
-#' @inheritParams data_ff_space
-#' @inheritParams  extra_partition
-#' @inheritParams trim_enlarge
-#'
-#' @return list of list.
-#' 1. information about subrange1
-#'     1. \eqn{R^2} using median of subrange1 as `para` for `ff`
-#'     2. subrange1
-#' 2. information about subrange2
-#'     1. \eqn{R^2} using median of subrange2 as `para` for `ff`
-#'     2. subrange1
-#' 3. ...
-#'
-#' @export
-#'
-#' @family partition fit functions
+#' @return integer. each scalar of the vector represent one digit of the
+#'   transformed number
 #'
 #' @examples
-#' \donotrun {
-#'     partition_fit_impl(data1, f_protein, space1, extra11, 2, 1, 1);
-#'     partition_fit_impl(data2, f_AI2_out, space2, extra2, 2, 1, 1);
-#' }
-partition_fit_impl <- function(data, ff, space, extra, partition, trim, enlarge) {
-	df <- nrow(space[,,1]);
-	n <- partition ^ df;
-	space.len <- dim(space)[3];
-	range <- space[,,1];
+#' base(443L, 3L, 6L)
+base <- function(x, radix, n.digit) {
+	result <- integer(n.digit);
+	i = 1L;
+	while (x > 0) {
+		result[i] = x %% radix;
+		x = x %/% radix;
+		i = i + 1;
+	}
+	rev(result);
+}
+
+
+#' @param spaces numeric array. `spaces[ , , k]` should
+#'   give a `space`, see `bisec_optim` below
+biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
+	df <- nrow(spaces[ , , 1]);		# how many parameters
+	n <- partition ^ df;			# how many subspaces per space
+	nspace <- dim(spaces)[3];		# how many spaces
+
+	range <- spaces[ , , 1];
 	sub.range <- range;
 	para <- rowMeans(range);
 	vec <- integer(df)
-	middle <- matrix(NA, n * space.len, 3);
+	middle <- matrix(NA, n * nspace, 3);
 	reserve <- 1;
 	if (trim > 0) {
 		if (trim >= 1)
@@ -78,20 +48,20 @@ partition_fit_impl <- function(data, ff, space, extra, partition, trim, enlarge)
 	result <- vector('list', reserve)
 	i = 1;
 
-	for (irange in seq(space.len)) {
-		range = space[,,irange]
+	for (irange in seq(nspace)) {
+		range = spaces[,,irange]
 		for (ipartition in seq(0, n - 1)) {
 			vec <- base(ipartition, partition, df);
 			para = range[,1] + (vec + 1 / 2) / partition * (range[,2] - range[,1])
-			middle[i, ] = c(R_square(data, ff, para, extra), ipartition, irange);
+			middle[i, ] = c(fun(para), ipartition, irange);
 			i = i + 1;
 		}
 	}
-	middle = middle[order(middle[,1], decreasing = T),,drop = FALSE];
+	middle = middle[order(middle[,1]),,drop = FALSE];
 	middle = middle[seq(reserve),, drop = FALSE];
 
 	for (j in seq_along(middle[,1])) {
-		range = space[,,middle[j,3]];
+		range = spaces[,,middle[j,3]];
 		vec = base(middle[j,2], partition, df);
 		sub.range[,1] = range[,1] + vec * (range[,2] - range[,1]) / partition;
 		sub.range[,2] = sub.range[,1] + (range[,2] - range[,1]) / partition;
@@ -105,42 +75,36 @@ partition_fit_impl <- function(data, ff, space, extra, partition, trim, enlarge)
 
 
 
-#' Title
+#' @title General-purpose Optimization (Minimization)
 #'
-#' @inheritParams  extra_partition
-#' @param times integer scalar. how many times should the initial range be
-#'   partitioned.
-#' @inheritParams trim_enlarge
-extra_partition_times_trim_enlarge <- function() {}
-
-
-
-#' Title
+#' @description `bisec_optim()` found parameters which minimize target function in a given space
 #'
-#' @inheritParams data_ff_space
-#' @inheritParams  extra_partition
+#' @details
+#'
+#' @param fun function. the function to be optimized, i.e. find minimal value. `fun(c(para1, para2, ..., paran))` should return a numeric scalar where `para` is a numeric vector, such as
+#' @param space numeric matrix. \eqn{n*2} matrix, where \eqn{n} is the number of
+#'   parameters to fit. `space[i, ]` should give a the range of ith parameter, i.e. `c(para1.min, para2.max)`. `space` specifies a n-dimension space, this space is uniformly partitioned into subspaces, and those subspaces which have the highest score is reserved for further partitioning. Finally we get the best space, and the centre point of this space contains the parameters we want.
+#' @param partition integer scalar. how partitions are the original range
+#'   divided per parameter.
 #' @param times integer scalar. how many times should the initial range be partitioned.
-#' @inheritParams trim_enlarge
+#' @param trim integer scalar. determine what proportion of total subranges will
+#'   be reserved for the next round of partition.
+#' @param enlarge integer scalar. how many times is the selected subrange
+#'   enlarged before the next round of partition.
 #'
-#' @return list.
-#' 1. \eqn{R^2} using the final parameter `para` for `ff`
-#' 2. final best fitted parameter
-#'
+#' @return numeric vector. The best parameters found.
 #' @export
 #'
-#' @family partition fit functions
-#'
 #' @examples
-#' \donotrun {
-#'     partition_fit(data1, f_protein, space1, extra11, 2, 2, 1/2, 1);
-#'     partition_fit(data2, f_AI2_out, space2, extra2, 3, 1, 1/3, 1);
-#' }
-partition_fit <- function(data, ff, space, extra, partition, times, trim, enlarge) {
+#'
+#' @section to do:
+#'     1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
+bisec_optim <- function(fun, space, partition, times, trim, enlarge) {
 	range <- space[,,1];
 	result <- NULL;
 
 	for (i in seq(times)) {
-		result <- partition_fit_impl(data, ff, space, extra, partition, trim, enlarge);
+		result <- biosec_optim_impl(fun, space, partition, trim, enlarge);
 		space <- vapply(result, function(x){x[[2]]},range);
 		gc();
 	}
@@ -149,7 +113,3 @@ partition_fit <- function(data, ff, space, extra, partition, times, trim, enlarg
 	result[[2]] = rowMeans(result[[2]]);
 	result;
 }
-
-
-
-bisec_optim <- function(fun, space)
