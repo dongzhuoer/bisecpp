@@ -12,7 +12,7 @@ assess(reality, ideal)
 \item{ideal}{numeric. ideal parameters}
 }
 \value{
-numeric scalar. the relative similarity between `reality` and `ideal`
+numeric scalar. the relative similarity between \code{reality} and \code{ideal}
 }
 \description{
 Title

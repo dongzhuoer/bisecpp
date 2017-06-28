@@ -17,11 +17,11 @@ uppper digits are filled by \eqn{0}}
 }
 \value{
 integer. each scalar of the vector represent one digit of the
-  transformed number
+transformed number
 }
 \description{
 transform decimal integer to other number mode, such as binary
-  (`radix = 2`)
+(\code{radix = 2})
 }
 \examples{
 base(443L, 3L, 6L)

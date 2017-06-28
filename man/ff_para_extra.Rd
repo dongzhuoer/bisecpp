@@ -7,7 +7,7 @@
 ff_para_extra()
 }
 \arguments{
-\item{ff}{function. `ff(para, extra)` gives the function `f()` that
+\item{ff}{function. \code{ff(para, extra)} gives the function \code{f()} that
 \eqn{y=f(x)}}
 
 \item{para}{numeric. see \code{ff}}

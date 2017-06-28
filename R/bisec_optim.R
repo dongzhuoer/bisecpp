@@ -25,52 +25,59 @@ base <- function(x, radix, n.digit) {
 	rev(result);
 }
 
-
+#' @title working horse for [biosec_optim]
+#'
 #' @param spaces numeric array. `spaces[ , , k]` should
 #'   give a `space`, see `bisec_optim` below
 biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
+	# perpare some variables which storage number
 	df <- nrow(spaces[ , , 1]);		# how many parameters
-	n <- partition ^ df;			# how many subspaces per space
+	nsubspace <- partition ^ df;	# how many subspaces per space
 	nspace <- dim(spaces)[3];		# how many spaces
 
-	range <- spaces[ , , 1];
-	sub.range <- range;
-	para <- rowMeans(range);
-	vec <- integer(df)
-	middle <- matrix(NA, n * nspace, 3);
-	reserve <- 1;
-	if (trim > 0) {
-		if (trim >= 1)
-			reserve = trim
-		else
-			reserve = ceiling(n ^ trim);
-	}
-	result <- vector('list', reserve)
-	i = 1;
+	# adjust reserve according to trim
+	if (trim >= 1)
+		reserve <- as.integer(trim)
+	else
+		reserve <- ceiling(nsubspace^trim);
 
-	for (irange in seq(nspace)) {
-		range = spaces[,,irange]
-		for (ipartition in seq(0, n - 1)) {
-			vec <- base(ipartition, partition, df);
-			para = range[,1] + (vec + 1 / 2) / partition * (range[,2] - range[,1])
-			middle[i, ] = c(fun(para), ipartition, irange);
-			i = i + 1;
+	# for each space, partition it into subspaces and eval `fun` with central point of each subspace
+	central <- matrix(NA, nsubspace * nspace, 3);
+	 		# storage information about the central point of all subsaces;
+	for (ispace in seq(nspace)) {
+		space <- spaces[ , , ispace];
+
+		for (isubspace in seq(0, nsubspace - 1)) {
+			vec <- base(isubspace, partition, df);
+			para = space[ , 1] + (vec + 1 / 2) / partition * (space[ , 2] - space[ , 1]);
+			central[isubspace + 1 + (ispace - 1)*nsubspace, ] = c(fun(para), isubspace, ispace);
 		}
 	}
-	middle = middle[order(middle[,1]),,drop = FALSE];
-	middle = middle[seq(reserve),, drop = FALSE];
 
-	for (j in seq_along(middle[,1])) {
-		range = spaces[,,middle[j,3]];
-		vec = base(middle[j,2], partition, df);
-		sub.range[,1] = range[,1] + vec * (range[,2] - range[,1]) / partition;
-		sub.range[,2] = sub.range[,1] + (range[,2] - range[,1]) / partition;
-		para = rowMeans(sub.range);
-		sub.range[,1] = para - (para - sub.range[,1]) * enlarge;
-		sub.range[,2] = para - (para - sub.range[,2]) * enlarge;
-		result[[j]] = list(middle[j,1], sub.range)
+	# sort and reserve best central point
+	central = central[order(central[ , 1]),,drop = FALSE];
+	central = central[seq(reserve), , drop = FALSE];
+
+	# for earch central point, get the subspace it belongs and enlarge it (optional).
+			# we only do this for reserved central points so we can save times.
+	result <- vector('list', reserve);
+	for (j in seq_along(central[ , 1])) {
+		space <- spaces[ , , central[j, 3]];
+		subspace <- space;
+
+		vec <- base(central[j,2], partition, df);
+		subspace[ , 1] = space[ , 1] + vec * (space[ ,2] - space[ ,1]) / partition;
+		subspace[ , 2] = subspace[ , 1] + (space[ , 2] - space[ ,1]) / partition;
+
+		para = rowMeans(subspace);
+		subspace[ , 1] = para - (para - subspace[ ,1]) * enlarge;
+		subspace[ , 2] = para - (para - subspace[ ,2]) * enlarge;
+
+		result[[j]] = list(central[j,1], subspace);
 	}
-	result
+
+	# return
+	result;
 }
 
 
@@ -79,7 +86,7 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #'
 #' @description `bisec_optim()` found parameters which minimize target function in a given space
 #'
-#' @details
+#' @details see paras.
 #'
 #' @param fun function. the function to be optimized, i.e. find minimal value. `fun(c(para1, para2, ..., paran))` should return a numeric scalar where `para` is a numeric vector, such as
 #' @param space numeric matrix. \eqn{n*2} matrix, where \eqn{n} is the number of
@@ -87,8 +94,8 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' @param partition integer scalar. how partitions are the original range
 #'   divided per parameter.
 #' @param times integer scalar. how many times should the initial range be partitioned.
-#' @param trim integer scalar. determine what proportion of total subranges will
-#'   be reserved for the next round of partition.
+#' @param trim numeric scalar. must be positive, determine what proportion of total subranges will
+#'   be reserved for the next round of partition. Let `n` be the number of subspaces per space, if `trim` >= 1, `as.integer(trim)`; otherwise, `ceiling(n^trim)`.
 #' @param enlarge integer scalar. how many times is the selected subrange
 #'   enlarged before the next round of partition.
 #'
@@ -96,19 +103,23 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' @export
 #'
 #' @examples
+#' \donotrun {
+#'     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
+#' }
 #'
 #' @section to do:
 #'     1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
 bisec_optim <- function(fun, space, partition, times, trim, enlarge) {
-	range <- space[,,1];
-	result <- NULL;
+	# transform `space` to `spaces` which contains only one space, for consistency in the following loop
+	spaces <- array(space, dim = c(dim(space), 1));
 
+	# loop `times` times
 	for (i in seq(times)) {
-		result <- biosec_optim_impl(fun, space, partition, trim, enlarge);
-		space <- vapply(result, function(x){x[[2]]},range);
-		gc();
+		result <- biosec_optim_impl(fun, spaces, partition, trim, enlarge);
+		spaces <- vapply(result, function(x) {x[[2]]}, space);
 	}
 
+	# make result
 	result <- result[[1]];
 	result[[2]] = rowMeans(result[[2]]);
 	result;

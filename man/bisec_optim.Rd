@@ -7,18 +7,18 @@
 bisec_optim(fun, space, partition, times, trim, enlarge)
 }
 \arguments{
-\item{fun}{function. the function to be optimized, i.e. find minimal value. `fun(c(para1, para2, ..., paran))` should return a numeric scalar where `para` is a numeric vector, such as}
+\item{fun}{function. the function to be optimized, i.e. find minimal value. \code{fun(c(para1, para2, ..., paran))} should return a numeric scalar where \code{para} is a numeric vector, such as}
 
 \item{space}{numeric matrix. \eqn{n*2} matrix, where \eqn{n} is the number of
-parameters to fit. `space[i, ]` should give a the range of ith parameter, i.e. `c(para1.min, para2.max)`. `space` specifies a n-dimension space, this space is uniformly partitioned into subspaces, and those subspaces which have the highest score is reserved for further partitioning. Finally we get the best space, and the centre point of this space contains the parameters we want.}
+parameters to fit. \code{space[i, ]} should give a the range of ith parameter, i.e. \code{c(para1.min, para2.max)}. \code{space} specifies a n-dimension space, this space is uniformly partitioned into subspaces, and those subspaces which have the highest score is reserved for further partitioning. Finally we get the best space, and the centre point of this space contains the parameters we want.}
 
 \item{partition}{integer scalar. how partitions are the original range
 divided per parameter.}
 
 \item{times}{integer scalar. how many times should the initial range be partitioned.}
 
-\item{trim}{integer scalar. determine what proportion of total subranges will
-be reserved for the next round of partition.}
+\item{trim}{numeric scalar. must be positive, determine what proportion of total subranges will
+be reserved for the next round of partition. Let \code{n} be the number of subspaces per space, if \code{trim} >= 1, \code{as.integer(trim)}; otherwise, \code{ceiling(n^trim)}.}
 
 \item{enlarge}{integer scalar. how many times is the selected subrange
 enlarged before the next round of partition.}
@@ -27,16 +27,19 @@ enlarged before the next round of partition.}
 numeric vector. The best parameters found.
 }
 \description{
-`bisec_optim()` found parameters which minimize target function in a given space
+\code{bisec_optim()} found parameters which minimize target function in a given space
 }
 \details{
-
+see paras.
 }
 \section{to do}{
 
-    1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
+1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
 }
 
 \examples{
+\\donotrun {
+    bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
+}
 
 }

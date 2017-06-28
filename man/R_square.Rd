@@ -7,10 +7,10 @@
 R_square(data, ff, para, extra)
 }
 \arguments{
-\item{data}{numeric matrix. `data[,1]` gives \eqn{x} and `data[,2]` gives
+\item{data}{numeric matrix. \code{data[,1]} gives \eqn{x} and \code{data[,2]} gives
 \eqn{y}}
 
-\item{ff}{function. `ff(para, extra)` gives the function `f()` that
+\item{ff}{function. \code{ff(para, extra)} gives the function \code{f()} that
 \eqn{y=f(x)}}
 
 \item{para}{numeric. see \code{ff}}
@@ -19,7 +19,7 @@ R_square(data, ff, para, extra)
 }
 \value{
 numeric scalar. \eqn{R^2} (coefficient of determination) showing how
-  well the function fits `data`
+well the function fits \code{data}
 }
 \description{
 Title
