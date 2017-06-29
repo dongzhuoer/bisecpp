@@ -23,3 +23,4 @@ f_AI2_out(ideal.para2, extra2)(seq(0, 270, 30))
 \seealso{
 Other AI-2 case functions: \code{\link{f_protein}}
 }
+\concept{AI-2 case functions}

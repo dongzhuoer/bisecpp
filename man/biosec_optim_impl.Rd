@@ -13,3 +13,6 @@ give a \code{space}, see \code{bisec_optim} below}
 \value{
 list. list of \code{list(fun.val, subsapce)} , first is best
 }
+\description{
+working horse for \link{biosec_optim}
+}

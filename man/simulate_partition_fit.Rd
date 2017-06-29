@@ -37,3 +37,4 @@ Title
 \seealso{
 Other simulate functions: \code{\link{simulate_data}}
 }
+\concept{simulate functions}

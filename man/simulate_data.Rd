@@ -24,3 +24,4 @@ Title
 \seealso{
 Other simulate functions: \code{\link{simulate_partition_fit}}
 }
+\concept{simulate functions}
