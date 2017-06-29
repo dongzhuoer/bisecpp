@@ -2,4 +2,5 @@
 
 export(R_square)
 export(assess)
+export(bisec_fit)
 export(bisec_optim)

@@ -24,5 +24,7 @@ transform decimal integer to other number mode, such as binary
 (\code{radix = 2})
 }
 \examples{
-base(443L, 3L, 6L)
+\\donotrun {
+    base(443L, 3L, 6L)
+}
 }

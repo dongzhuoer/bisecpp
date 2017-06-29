@@ -24,7 +24,12 @@ be reserved for the next round of partition. Let \code{n} be the number of subsp
 enlarged before the next round of partition.}
 }
 \value{
-numeric vector. The best parameters found.
+list.
+\enumerate{
+\item value, numeric saclar. smallest function value found
+\item para, numeric vector. best parameters.
+\item space, numeric matrix. best solution space.
+}
 }
 \description{
 \code{bisec_optim()} found parameters which minimize target function in a given space
@@ -37,9 +42,18 @@ see paras.
 1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
 }
 
+\section{testthat}{
+
+bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1);
+bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 1/3, 1);
+}
+
 \examples{
 \\donotrun {
     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
 }
 
+}
+\seealso{
+\link{biosec_optim_impl}
 }
