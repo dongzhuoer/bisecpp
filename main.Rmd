@@ -1,0 +1,39 @@
+---
+title: "AI-2 case"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(bisecpp)
+
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, collapse = TRUE);
+```
+
+```{r}
+R_square(data1, f_protein, ideal.para11, extra11);
+
+R_square(data1, f_protein, ideal.para11, extra12);
+
+R_square(data2, f_AI2_out, ideal.para2, extra2);
+```
+
+```{r}
+assess(ideal.para11, ideal.para11 * (1 + 0.1 * runif(3)));
+```
+
+```{r}
+partition_fit(data1, f_protein, space1, extra11, 2, 2, 1/2, 1);
+
+partition_fit(data2, f_AI2_out, space2, extra2, 3, 1, 1/3, 1);
+```
+
+```{r}
+simulate_partition_fit(seq(60,240,60), f_protein, ideal.para11 , extra11, 10,3,1/3, 1, 3);
+
+simulate_partition_fit(seq(0,270,30), f_AI2_out, ideal.para2 , extra2, 3,1,1/3, 1, 3);
+```
+
+```{r}
+sapply(c(3:10), function(x){simulate_partition_fit(seq(60,240,60), f_protein, ideal.para11 , extra11, x,10,1/3, 1, 3)})
+```
+

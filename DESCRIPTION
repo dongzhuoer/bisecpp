@@ -1,7 +1,7 @@
 Package: bisecpp
 Type: Package
 Title: General-purpose Optimization using enhanced Bisection method
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: person("Zhuoer", "Dong", email = "dongzhuoer@mail.nankai.edu.cn", 
 	role = c("aut", "cre"))
 Description: General-purpose Optimization using enhanced Bisection method. It 

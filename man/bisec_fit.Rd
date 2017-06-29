@@ -46,8 +46,8 @@ even complex coupled differential equation that you can't get a analytic solutio
 
 \examples{
 \\donotrun {
-    partition_fit_impl(data1, f_protein, space1, extra11, 2, 1, 1);
-    partition_fit_impl(data2, f_AI2_out, space2, extra2, 2, 1, 1);
+    bisec_fit(data1, f_protein, extra11, space1, 2, 5, 1/3, 1);
+    bisec_fit(data2, f_AI2_out, extra2, space2, 2, 5, 10, 1);
 }
 
 }
