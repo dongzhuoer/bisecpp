@@ -12,3 +12,9 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
+Collate: 
+    'simulate-fit.R'
+    'AI2-case.R'
+    'bisec-fit.R'
+    'bisec-optim.R'
+    'utility.R'

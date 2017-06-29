@@ -13,7 +13,9 @@
 #'   transformed number
 #'
 #' @examples
-#' base(443L, 3L, 6L)
+#' \donotrun {
+#'     base(443L, 3L, 6L)
+#' }
 base <- function(x, radix, n.digit) {
 	result <- integer(n.digit);
 	i = 1L;
@@ -29,6 +31,8 @@ base <- function(x, radix, n.digit) {
 #'
 #' @param spaces numeric array. `spaces[ , , k]` should
 #'   give a `space`, see `bisec_optim` below
+#'
+#' @return list. list of `list(fun.val, subsapce)` , first is best
 biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 	# perpare some variables which storage number
 	df <- nrow(spaces[ , , 1]);		# how many parameters
@@ -99,8 +103,13 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' @param enlarge integer scalar. how many times is the selected subrange
 #'   enlarged before the next round of partition.
 #'
-#' @return numeric vector. The best parameters found.
+#' @return list.
+#' 1. value, numeric saclar. smallest function value found
+#' 2. para, numeric vector. best parameters.
+#' 3. space, numeric matrix. best solution space.
 #' @export
+#'
+#' @seealso [biosec_optim_impl]
 #'
 #' @examples
 #' \donotrun {
@@ -109,6 +118,10 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #'
 #' @section to do:
 #'     1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
+#'
+#' @section testthat:
+#'     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1);
+#'     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 1/3, 1);
 bisec_optim <- function(fun, space, partition, times, trim, enlarge) {
 	# transform `space` to `spaces` which contains only one space, for consistency in the following loop
 	spaces <- array(space, dim = c(dim(space), 1));
@@ -120,7 +133,6 @@ bisec_optim <- function(fun, space, partition, times, trim, enlarge) {
 	}
 
 	# make result
-	result <- result[[1]];
-	result[[2]] = rowMeans(result[[2]]);
-	result;
+	best <- result[[1]];			# choose best `list(fun.val, subsapce)`
+	list(value = best[[1]], para = rowMeans(best[[2]]), space = best[[2]])
 }
