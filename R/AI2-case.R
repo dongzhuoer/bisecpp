@@ -8,13 +8,9 @@ extra12 <- c(mu = 0.0056, iOD600 = 0.5);                      #cell (others)
 extra2 <- c(IPTG.ACDB = TRUE, IPTG.K = TRUE, AI2.out.0 = 1); #sundries
 devtools::use_data(extra11, extra12, extra2, overwrite = TRUE);
 
-range1 <- cbind(integer(length(ideal.para11)), ideal.para11 * 3);
-range2 <- cbind(integer(length(ideal.para2)), ideal.para2 * 3);
-devtools::use_data(range1, range2, overwrite = TRUE)
-
-space1 <- array(range1, dim = c(dim(range1), 1));
-space2 <- array(range2, dim = c(dim(range2), 1));
-devtools::use_data(space1, space2, overwrite = TRUE);
+space1 <- cbind(integer(length(ideal.para11)), ideal.para11 * 3);
+space2 <- cbind(integer(length(ideal.para2)), ideal.para2 * 3);
+devtools::use_data(space1, space2, overwrite = TRUE)
 
 
 
