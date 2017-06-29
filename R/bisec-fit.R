@@ -80,47 +80,11 @@ assess <- function(reality, ideal) {
 #' @section to do:
 #'     1. support multivariate function
 bisec_fit <- function(data, ff, extra, space, partition, times, trim, enlarge) {
-	df <- nrow(space[,,1]);
-	n <- partition ^ df;
-	space.len <- dim(space)[3];
-	range <- space[,,1];
-	sub.range <- range;
-	para <- rowMeans(range);
-	vec <- integer(df)
-	middle <- matrix(NA, n * space.len, 3);
-	reserve <- 1;
-	if (trim > 0) {
-		if (trim >= 1)
-			reserve = trim
-		else
-			reserve = ceiling(n ^ trim);
+	fun <- function(para) {
+		abs(1 - R_square(data, ff, para, extra));
 	}
-	result <- vector('list', reserve)
-	i = 1;
 
-	for (irange in seq(space.len)) {
-		range = space[,,irange]
-		for (ipartition in seq(0, n - 1)) {
-			vec <- base(ipartition, partition, df);
-			para = range[,1] + (vec + 1 / 2) / partition * (range[,2] - range[,1])
-			middle[i, ] = c(R_square(data, ff, para, extra), ipartition, irange);
-			i = i + 1;
-		}
-	}
-	middle = middle[order(middle[,1], decreasing = T),,drop = FALSE];
-	middle = middle[seq(reserve),, drop = FALSE];
-
-	for (j in seq_along(middle[,1])) {
-		range = space[,,middle[j,3]];
-		vec = base(middle[j,2], partition, df);
-		sub.range[,1] = range[,1] + vec * (range[,2] - range[,1]) / partition;
-		sub.range[,2] = sub.range[,1] + (range[,2] - range[,1]) / partition;
-		para = rowMeans(sub.range);
-		sub.range[,1] = para - (para - sub.range[,1]) * enlarge;
-		sub.range[,2] = para - (para - sub.range[,2]) * enlarge;
-		result[[j]] = list(middle[j,1], sub.range)
-	}
-	result
+	bisec_optim(fun, space, partition, times, trim, enlarge)
 }
 
 
