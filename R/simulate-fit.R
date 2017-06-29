@@ -45,12 +45,11 @@ simulate_data <- function(ff, para, extra, x) {
 simulate_partition_fit <- function(x, ff, ideal.para, extra, patition, times, trim, enlarge, scale, details = TRUE) {
 	data <- simulate_data(ff, ideal.para, extra, x);
 	range <- cbind(integer(length(ideal.para)),ideal.para*scale);
-	space <- array(range, dim = c(dim(range), 1));
 	start <- Sys.time();
-	result <- partition_fit(data, ff, space, extra, patition, times, trim, enlarge);
+	result <- bisec_fit(data, ff, extra, range, patition, times, trim, enlarge);
 	result = c(time = as.numeric(Sys.time() - start),
-			   error = assess(result[[2]], ideal.para),
-			   RSquare = result[[1]],
+			   assess = assess(result[[2]], ideal.para),
+			   RSquare = 1 - result[[1]],
 			   len = patition,
 			   times = times,
 			   trim = trim,

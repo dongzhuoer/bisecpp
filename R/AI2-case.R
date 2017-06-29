@@ -5,7 +5,7 @@ devtools::use_data(ideal.para11, ideal.para12, ideal.para2, overwrite = TRUE)
 
 extra11 <- c(mu = 0.0044, iOD600 = 0.5);                      #cell (with ACDB)
 extra12 <- c(mu = 0.0056, iOD600 = 0.5);                      #cell (others)
-extra2 <- c(IPTG.ACDB = TRUE, IPTG.K = TRUE, AI2.out.0 = 1); #sundries
+extra2 <- c(IPTG.ACDB = TRUE, IPTG.K = TRUE, AI2.out.0 = 1);  #sundries
 devtools::use_data(extra11, extra12, extra2, overwrite = TRUE);
 
 space1 <- cbind(integer(length(ideal.para11)), ideal.para11 * 3);

@@ -14,6 +14,9 @@ R_square(data, ff, para, extra)
 numeric scalar. \eqn{R^2} (coefficient of determination) showing how
 well the function fits \code{data}
 }
+\description{
+get R square from data and fit function
+}
 \examples{
 \\donotrun {
     R_square(data1, f_protein, ideal.para11, extra11)

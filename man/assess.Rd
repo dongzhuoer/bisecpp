@@ -14,6 +14,9 @@ assess(reality, ideal)
 \value{
 numeric scalar. the relative similarity between \code{reality} and \code{ideal}
 }
+\description{
+assess how reality accord with the ideal
+}
 \examples{
 \\donotrun {
     assess(ideal.para11, ideal.para11 * (1 + 0.1 * runif(3)))
