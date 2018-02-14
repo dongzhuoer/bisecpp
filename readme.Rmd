@@ -10,12 +10,19 @@ library(ggplot2)
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, collapse = TRUE, fig.path = 'images/');
 ```
 
-General-purpose Optimization using enhanced bisection method
+General-purpose optimization using enhanced bisection method. It 
+    also contains functions for solving equations and model fitting. Still 
+    developing, push request in GitHub is welcomed.
 
+[![Build Status](https://travis-ci.com/dongzhuoer/bisecpp.svg?branch=master)](https://travis-ci.com/dongzhuoer/bisecpp)
+[![Build status](https://ci.appveyor.com/api/projects/status/5ko88oq3my482lbt?svg=true)](https://ci.appveyor.com/project/dongzhuoer/bisecpp)
 
 I developed general-purpose optimization algorithm using enhanced bisection method. The key problem is that when you want to fit a complex model defined by tangled differential equation which can only be solved numerically, existing methods usually takes very long time (you may even run out of memory with some software like Mathematica®). I implement a novel program which can give a pretty good solution in reasonable time.
 
-to do: incorporate `iGEM/model/R`
+# to do
+
+1. incorporate `iGEM/model/R`
+1. compare with [basicTrendline](https://github.com/PhDMeiwp/basicTrendline) http://blog.sciencenet.cn/blog-651374-1094308.html
 
 how can you fit this equation?
 ![](images/model.png)
