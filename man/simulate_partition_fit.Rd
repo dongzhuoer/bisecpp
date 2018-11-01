@@ -4,8 +4,8 @@
 \alias{simulate_partition_fit}
 \title{Title}
 \usage{
-simulate_partition_fit(x, ff, ideal.para, extra, patition, times, trim, enlarge,
-  scale, details = TRUE)
+simulate_partition_fit(x, ff, ideal.para, extra, patition, times, trim,
+  enlarge, scale, details = TRUE)
 }
 \arguments{
 \item{x}{numeric. see \link{simulate_data}}
