@@ -2,7 +2,7 @@
 % Please edit documentation in R/AI2-case.R
 \name{f_protein}
 \alias{f_protein}
-\title{Title}
+\title{function for protein concentration}
 \usage{
 f_protein(para, extra)
 }
@@ -15,14 +15,11 @@ f_protein(para, extra)
 function. returns \eqn{y} when giving \eqn{x} as argument
 }
 \description{
-Title
+function for protein concentration
 }
 \examples{
-donotrun {
-    protein_ACDB <- f_protein(ideal.para11, extra11) #protein with ACDB gene and IPTG
-    protein_K <- f_protein(ideal.para11, extra12) #protein with IPTG
-    protein <- f_protein(ideal.para12, extra12) #protein with nothing
-}
+NULL
+
 }
 \seealso{
 Other AI-2 case functions: \code{\link{f_AI2_out}}

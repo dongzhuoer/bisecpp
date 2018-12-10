@@ -42,16 +42,9 @@ see paras.
 1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
 }
 
-\section{testthat}{
-
-bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1);
-bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 1/3, 1);
-}
-
 \examples{
-\\donotrun {
-    bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
-}
+bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
+bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 1/3, 1)
 
 }
 \seealso{

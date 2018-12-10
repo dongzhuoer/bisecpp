@@ -112,16 +112,12 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' @seealso [biosec_optim_impl]
 #'
 #' @examples
-#' \donotrun {
-#'     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
-#' }
+#' bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
+#' bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 1/3, 1)
 #'
 #' @section to do:
 #'     1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
 #'
-#' @section testthat:
-#'     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1);
-#'     bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 1/3, 1);
 bisec_optim <- function(fun, space, partition, times, trim, enlarge) {
 	# transform `space` to `spaces` which contains only one space, for consistency in the following loop
 	spaces <- array(space, dim = c(dim(space), 1));

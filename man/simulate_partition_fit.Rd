@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate-fit.R
 \name{simulate_partition_fit}
 \alias{simulate_partition_fit}
-\title{Title}
+\title{use simulated data to evaluate fitting function}
 \usage{
 simulate_partition_fit(x, ff, ideal.para, extra, patition, times, trim,
   enlarge, scale, details = TRUE)
@@ -26,13 +26,12 @@ information.}
 vector. see examples for details.
 }
 \description{
-Title
+use simulated data to evaluate fitting function
 }
 \examples{
-\\donotrun {
-    simulate_partition_fit(seq(60,240,60), f_protein, ideal.para11 , extra11, 10,3,1/3, 1, 3);
-    simulate_partition_fit(seq(0,270,30), f_AI2_out, ideal.para2 , extra2, 3,1,1/3, 1, 3);
-}
+simulate_partition_fit(seq(60,240,60), f_protein, ideal.para11 , extra11, 10,3,1/3, 1, 3)
+simulate_partition_fit(seq(0,270,30), f_AI2_out, ideal.para2 , extra2, 3,1,1/3, 1, 3)
+
 }
 \seealso{
 Other simulate functions: \code{\link{simulate_data}}

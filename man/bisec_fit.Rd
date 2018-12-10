@@ -45,10 +45,8 @@ even complex coupled differential equation that you can't get a analytic solutio
 }
 
 \examples{
-\\donotrun {
-    bisec_fit(data1, f_protein, extra11, space1, 2, 5, 1/3, 1);
-    bisec_fit(data2, f_AI2_out, extra2, space2, 2, 5, 10, 1);
-}
+bisec_fit(data1, f_protein, extra11, space1, 2, 5, 1/3, 1)
+bisec_fit(data2, f_AI2_out, extra2, space2, 2, 5, 4, 1)
 
 }
 \seealso{
