@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate-fit.R
 \name{simulate_data}
 \alias{simulate_data}
-\title{Title}
+\title{generate simulated data from given model}
 \usage{
 simulate_data(ff, para, extra, x)
 }
@@ -13,13 +13,12 @@ simulate_data(ff, para, extra, x)
 numeric matrix. \code{cbind(x, y)}
 }
 \description{
-Title
+generate simulated data from given model
 }
 \examples{
-\\donotrun {
-    data1 <- simulate_data(f_protein, ideal.para11, extra11, seq(60,240,60));
-    data2 <- simulate_data(f_AI2_out, ideal.para2, extra21, seq(0,270,30));
-}
+simulate_data(f_protein, ideal.para11, extra11, seq(60,240,60))
+simulate_data(f_AI2_out, ideal.para2, extra2, seq(0,270,30))
+
 }
 \seealso{
 Other simulate functions: \code{\link{simulate_partition_fit}}

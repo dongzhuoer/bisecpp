@@ -18,9 +18,8 @@ well the function fits \code{data}
 get R square from data and fit function
 }
 \examples{
-\\donotrun {
-    R_square(data1, f_protein, ideal.para11, extra11)
-    R_square(data1, f_protein, ideal.para11, extra12)
-    R_square(data2, f_AI2_out, ideal.para2, extra2)
-}
+R_square(data1, f_protein, ideal.para11, extra11)
+R_square(data1, f_protein, ideal.para11, extra12)
+R_square(data2, f_AI2_out, ideal.para2, extra2)
+
 }

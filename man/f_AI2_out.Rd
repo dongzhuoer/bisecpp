@@ -2,7 +2,7 @@
 % Please edit documentation in R/AI2-case.R
 \name{f_AI2_out}
 \alias{f_AI2_out}
-\title{Title}
+\title{function for extracelluar AI2 concentration}
 \usage{
 f_AI2_out(para, extra)
 }
@@ -15,10 +15,11 @@ f_AI2_out(para, extra)
 function. returns \eqn{y} when giving \eqn{x} as argument
 }
 \description{
-Title
+function for extracelluar AI2 concentration
 }
 \examples{
-f_AI2_out(ideal.para2, extra2)(seq(0, 270, 30))
+NULL
+
 }
 \seealso{
 Other AI-2 case functions: \code{\link{f_protein}}

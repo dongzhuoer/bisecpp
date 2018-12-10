@@ -1,12 +1,12 @@
 Package: bisecpp
 Type: Package
 Title: General-purpose Optimization using enhanced Bisection method
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: person("Zhuoer", "Dong", email = "dongzhuoer@mail.nankai.edu.cn", 
 	role = c("aut", "cre"))
-DDescription: refer to https://dongzhuoer.github.io/minir
-URL: https://github.com/dongzhuoer/minir
-BugReports: https://github.com/dongzhuoer/minir/issues
+DDescription: refer to https://dongzhuoer.github.io/bisecpp
+URL: https://github.com/dongzhuoer/bisecpp
+BugReports: https://github.com/dongzhuoer/bisecpp/issues
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -14,4 +14,4 @@ RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE, roclets=c('rd', 'collate', 'namespace'))
 Imports:
     magrittr
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown
