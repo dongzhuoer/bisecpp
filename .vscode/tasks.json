@@ -7,11 +7,11 @@
     "tasks": [
         {
             "label": "document",
-            "command": "R --slave -e 'devtools::document()'",
+            "command": "R --slave -e 'roxygen2::roxygenize()'",
         },
         {
             "label": "test",
-            "command": "R --slave -e 'devtools::test()'",
+            "command": "R --slave -e \"pkgload::load_all(); testthat::test_dir('tests/testthat/')\"",
             // actually it's not required, I add it here since if build depends on both document and test, they will show in two separate terminals
             "dependsOn": [
                 "document"

@@ -24,7 +24,7 @@ if (length(rmd_vignettes) > 0L) {
 		)
 	}
 	
-	dir('vignettes', 'html$') %>% {file.rename(paste0('vignettes/', .), paste0('inst/doc/', .))}
+	dir('vignettes', 'html$') %>% {file.copy(paste0('vignettes/', .), paste0('inst/doc/', .), overwrite = T)}
 }
 ```
 

@@ -55,7 +55,7 @@ usethis::use_data(data1, data2, overwrite = TRUE);
 
 ```{r reinstall}
 devtools::test()     # test the new data
-devtools::document() # you may also have edited data documentation
+roxygen2::roxygenize() # you may also have edited data documentation
 
 system('R CMD INSTALL --no-multiarch --with-keep.source .')
 devtools::reload()   # now you can use the new data in current R session 
