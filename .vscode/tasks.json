@@ -4,28 +4,46 @@
     "version": "2.0.0",
     "type": "shell",
     "problemMatcher": [],
+    "presentation": {
+        "reveal": "silent",
+    },
     "tasks": [
         {
-            "label": "document",
-            "command": "R --slave -e 'roxygen2::roxygenize()'",
+            "label": "view GitHub",
+            "command": "firefox https://github.com/dongzhuoer/${workspaceFolderBasename} 2> /dev/null",
         },
         {
-            "label": "test",
-            "command": "R --slave -e \"pkgload::load_all(); testthat::test_dir('tests/testthat/')\"",
-            // actually it's not required, I add it here since if build depends on both document and test, they will show in two separate terminals
+            "label": "view local pkgdown",
+            "command": "firefox pkgdown/output/index.html 2> /dev/null",
+        },
+        {
+            "label": "view online pkgdown",
+            "command": "firefox https://pkgdown.dongzhuoer.com/dongzhuoer/${workspaceFolderBasename} 2> /dev/null",
+        },
+        {
+            "label": "document",
+            "command": "Rscript -e 'Rcpp::compileAttributes(); roxygen2::roxygenize()'",
+        },
+        {
+            "label": "vignettes",
+            "command": "Rscript -e \"rmarkdown::render('R-raw/vignettes.Rmd')\"",
+        },
+        {
+            "label": "data",
+            "command": "Rscript -e \"rmarkdown::render('R-raw/data.Rmd')\"",
+        },
+        {
+            "label": "pkgdown",
+            "command": "Rscript -e 'pkgdown::build_site(lazy = T)'",
             "dependsOn": [
                 "document"
             ],
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            },
         },
         {
             "label": "build",
             "command": "R CMD INSTALL --no-multiarch --with-keep.source .",
             "dependsOn": [
-                "test"
+                "document"
             ],
             "group": {
                 "kind": "build",
@@ -33,20 +51,12 @@
             },
         },
         {
-            "label": "data",
-            "command": "R -e \"rmarkdown::render('R-raw/data.Rmd')\"",
-        },
-        {
-            "label": "vignettes",
-            "command": "R -e \"rmarkdown::render('R-raw/vignettes.Rmd')\"",
-        },
-        {
-            "label": "pkgdown",
-            "command": "R -e 'pkgdown::build_site()'",
-            "problemMatcher": [],
-            "dependsOn": [
-                "document"
-            ]
+            "label": "test",
+            "command": "Rscript -e \"pkgload::load_all(); testthat::test_dir('tests/testthat/')\"",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
         },
     ]
 }

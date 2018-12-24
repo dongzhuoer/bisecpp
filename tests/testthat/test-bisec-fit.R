@@ -1,5 +1,5 @@
 testthat::context('Testing bisec0-fit.R')
-if (basename(getwd()) == 'testthat') setwd('../..')  # workspace is reset per file
+setwd(here::here(''))  # workspace is reset per file
 
 testthat::test_that('R_square()', {
 	testthat::expect_equal(R_square(data1, f_protein, ideal.para11, extra11), 1)
