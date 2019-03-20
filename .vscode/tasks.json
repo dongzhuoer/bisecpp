@@ -10,16 +10,19 @@
             "command": "R --slave -e 'Rcpp::compileAttributes(); roxygen2::roxygenize()'",
         },
         {
-            "label": "pkgdown",
-            "command": "R --slave -e 'pkgdown::build_site()'",
-        },
-        {
             "label": "vignettes",
             "command": "R --slave -e \"rmarkdown::render('R-raw/vignettes.Rmd')\"",
         },
         {
             "label": "data",
             "command": "R --slave -e \"rmarkdown::render('R-raw/data.Rmd')\"",
+        },
+        {
+            "label": "pkgdown",
+            "command": "R --slave -e 'pkgdown::build_site()'",
+            "dependsOn": [
+                "document"
+            ],
         },
         {
             "label": "build",
