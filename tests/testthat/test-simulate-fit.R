@@ -1,5 +1,5 @@
 testthat::context('Testing simulate-fit.R')
-if (basename(getwd()) == 'testthat') setwd('../..')  # workspace is reset per file
+setwd(here::here(''))  # workspace is reset per file
 
 testthat::test_that('simulate_data()', {
 	testthat::expect_equal(

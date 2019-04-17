@@ -1,5 +1,5 @@
 testthat::context('Testing bisec-optim.R')
-if (basename(getwd()) == 'testthat') setwd('../..')  # workspace is reset per file
+setwd(here::here(''))  # workspace is reset per file
 
 testthat::test_that('base()', {
 	testthat::expect_identical(base(443L, 3L, 6L), c(1L, 2L, 1L, 1L, 0L, 2L))
