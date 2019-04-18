@@ -15,5 +15,6 @@ Roxygen: list(markdown = TRUE, roclets=c('rd', 'collate', 'namespace'))
 Imports:
     magrittr
 Suggests:
-    prettydoc
+    prettydoc,
+    ggplot2
 VignetteBuilder: knitr, rmarkdown
