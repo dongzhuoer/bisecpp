@@ -4,8 +4,8 @@ Title: General-purpose Optimization using enhanced Bisection method
 Version: 0.3.0
 Authors@R: person("Zhuoer", "Dong", email = "dongzhuoer@mail.nankai.edu.cn", 
 	role = c("aut", "cre"))
-DDescription: refer to https://dongzhuoer.github.io/bisecpp
-URL: https://dongzhuoer.github.io/bisecpp, https://github.com/dongzhuoer/bisecpp
+DDescription: refer to https://github.com/dongzhuoer/bisecpp
+URL: https://pkgdown.dongzhuoer.com/dongzhuoer/bisecpp, https://github.com/dongzhuoer/bisecpp
 BugReports: https://github.com/dongzhuoer/bisecpp/issues
 License: file LICENSE
 Encoding: UTF-8
