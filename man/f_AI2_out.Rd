@@ -22,6 +22,7 @@ NULL
 
 }
 \seealso{
-Other AI-2 case functions: \code{\link{f_protein}}
+Other AI-2 case functions: 
+\code{\link{f_protein}()}
 }
 \concept{AI-2 case functions}

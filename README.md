@@ -1,10 +1,10 @@
 # bisecpp
-[![Build Status](https://travis-ci.com/dongzhuoer/bisecpp.svg?branch=master)](https://travis-ci.com/dongzhuoer/bisecpp)
+
 
 
 ## Overview
 
-General-purpose optimization using enhanced bisection method. It also contains functions for solving equations and model fitting. Still developing, push request in GitHub is welcomed.
+General-purpose optimization using enhanced bisection method. It also contains functions for solving equations and model fitting. Still developing, pull request in GitHub is welcomed.
 
  
 
@@ -15,11 +15,9 @@ if (!('remotes' %in% .packages(T))) install.packages('remotes');
 remotes::install_github('dongzhuoer/minir');
 ```
 
-## Usage
+## [Usage](https://dongzhuoer.github.io/bisecpp/articles/bisecpp.html)
 
-refer to `vignette('bisecpp')`.
 
-# to do
+## For developers
 
-1. incorporate `iGEM/model/R`
-1. compare with [basicTrendline](https://github.com/PhDMeiwp/basicTrendline) http://blog.sciencenet.cn/blog-651374-1094308.html
+1. TO DO: compare with [basicTrendline](https://github.com/PhDMeiwp/basicTrendline), http://blog.sciencenet.cn/blog-651374-1094308.html

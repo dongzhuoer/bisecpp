@@ -1,6 +1,8 @@
 testthat::context('Testing bisec-optim.R')
 setwd(here::here(''))  # workspace is reset per file
 
+
+
 testthat::test_that('base()', {
 	testthat::expect_identical(base(443L, 3L, 6L), c(1L, 2L, 1L, 1L, 0L, 2L))
 })
@@ -25,4 +27,3 @@ testthat::test_that('bisec_optim()', {
 		result
 	)
 })
-

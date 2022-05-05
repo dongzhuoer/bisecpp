@@ -22,6 +22,7 @@ NULL
 
 }
 \seealso{
-Other AI-2 case functions: \code{\link{f_AI2_out}}
+Other AI-2 case functions: 
+\code{\link{f_AI2_out}()}
 }
 \concept{AI-2 case functions}

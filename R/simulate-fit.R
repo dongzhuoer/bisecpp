@@ -15,6 +15,8 @@ simulate_data <- function(ff, para, extra, x) {
 	cbind(x, y = ff(para, extra)(x));
 }
 
+
+
 #' @title use simulated data to evaluate fitting function
 #'
 #' @param x numeric. see [simulate_data]
@@ -51,4 +53,3 @@ simulate_partition_fit <- function(x, ff, ideal.para, extra, patition, times, tr
 	)
 	if (details) c(result, ideal.para, extra) else result;
 }
-

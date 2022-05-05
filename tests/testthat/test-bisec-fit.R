@@ -1,5 +1,7 @@
-testthat::context('Testing bisec0-fit.R')
+testthat::context('Testing bisec-fit.R')
 setwd(here::here(''))  # workspace is reset per file
+
+
 
 testthat::test_that('R_square()', {
 	testthat::expect_equal(R_square(data1, f_protein, ideal.para11, extra11), 1)
@@ -27,4 +29,3 @@ testthat::test_that('bisec_fit()', {
 	testthat::expect_equal(bisec_fit(data1, f_protein, extra11, space1, 2, 5, 1/3, 1), result)
 	testthat::expect_equal(bisec_fit(data1, f_protein, extra11, space1, 2, 5, 4, 1), result)
 })
-

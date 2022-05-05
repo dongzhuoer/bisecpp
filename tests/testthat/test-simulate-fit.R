@@ -1,6 +1,8 @@
 testthat::context('Testing simulate-fit.R')
 setwd(here::here(''))  # workspace is reset per file
 
+
+
 testthat::test_that('simulate_data()', {
 	testthat::expect_equal(
 		simulate_data(f_protein, ideal.para11, extra11, seq(60,240,60)),
@@ -38,4 +40,3 @@ testthat::test_that('simulate_partition_fit()', {
 		  AI2.out.0 = 1)
 	)
 })
-

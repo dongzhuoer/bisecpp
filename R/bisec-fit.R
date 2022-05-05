@@ -79,15 +79,3 @@ bisec_fit <- function(data, ff, extra, space, partition, times, trim, enlarge) {
 
 	bisec_optim(fun, space, partition, times, trim, enlarge)
 }
-
-
-
-
-
-
-
-
-
-
-
-

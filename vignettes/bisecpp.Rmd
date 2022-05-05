@@ -18,6 +18,8 @@ library(bisecpp)
 library(ggplot2)
 ```
 
+
+
 # Innovation
 
 how can you fit this equation?
@@ -25,8 +27,9 @@ how can you fit this equation?
 
 When you want to fit a complex model defined by tangled differential equation which can only be solved numerically, existing methods usually takes very long time (you may even run out of memory with some software like Mathematica®). So I implement a novel program which can give a pretty good solution in reasonable time.
 
-# Solution
 
+
+# Solution
 
 ```{r}
 ideal.para <- c(k.in = 0.008, k.out = 0.045, k.p = 0.006);
@@ -41,11 +44,8 @@ fit.RSquare <- fit[[1]];
 fit.para <- fit[[2]];
 fit.fun <- f_AI2_out(fit.para, extra)
 
-
 ggplot() + 
 	geom_point(aes(x, y), data.frame(data)) + 
 	geom_line(aes(x,y), data.frame(x = 1:270, y = fit.fun(1:270))) + 
 	labs(title = paste0('RSquare = ', formatC(fit.RSquare, 6)))
 ```
-
-

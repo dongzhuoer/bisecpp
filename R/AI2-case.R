@@ -19,6 +19,7 @@ f_protein <- function(para, extra) {
 }
 
 
+
 #' @title function for extracelluar AI2 concentration
 #'
 #' @inheritParams f_protein

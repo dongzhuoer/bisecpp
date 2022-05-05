@@ -13,7 +13,7 @@
 #'   transformed number
 #'
 #' @examples
-#' \donotrun {
+#' \dontrun{
 #'     base(443L, 3L, 6L)
 #' }
 base <- function(x, radix, n.digit) {
@@ -27,12 +27,16 @@ base <- function(x, radix, n.digit) {
 	rev(result);
 }
 
+
+
 #' @title working horse for [biosec_optim]
 #'
 #' @param spaces numeric array. `spaces[ , , k]` should
 #'   give a `space`, see `bisec_optim` below
 #'
 #' @return list. list of `list(fun.val, subsapce)` , first is best
+#' 
+#' @keywords internal
 biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 	# perpare some variables which storage number
 	df <- nrow(spaces[ , , 1]);		# how many parameters
@@ -108,8 +112,6 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' 2. para, numeric vector. best parameters.
 #' 3. space, numeric matrix. best solution space.
 #' @export
-#'
-#' @seealso [biosec_optim_impl]
 #'
 #' @examples
 #' bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)

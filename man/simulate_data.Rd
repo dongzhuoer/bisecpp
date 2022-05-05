@@ -7,7 +7,7 @@
 simulate_data(ff, para, extra, x)
 }
 \arguments{
-\item{x}{numeric. used to generate \code{y} from \code{ff(para, extra)(x))}}
+\item{x}{numeric. used to generate \code{y} from \verb{ff(para, extra)(x))}}
 }
 \value{
 numeric matrix. \code{cbind(x, y)}
@@ -21,6 +21,7 @@ simulate_data(f_AI2_out, ideal.para2, extra2, seq(0,270,30))
 
 }
 \seealso{
-Other simulate functions: \code{\link{simulate_partition_fit}}
+Other simulate functions: 
+\code{\link{simulate_partition_fit}()}
 }
 \concept{simulate functions}

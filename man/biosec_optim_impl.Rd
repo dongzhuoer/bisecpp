@@ -16,3 +16,4 @@ list. list of \code{list(fun.val, subsapce)} , first is best
 \description{
 working horse for \link{biosec_optim}
 }
+\keyword{internal}

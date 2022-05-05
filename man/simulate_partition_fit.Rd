@@ -4,8 +4,18 @@
 \alias{simulate_partition_fit}
 \title{use simulated data to evaluate fitting function}
 \usage{
-simulate_partition_fit(x, ff, ideal.para, extra, patition, times, trim,
-  enlarge, scale, details = TRUE)
+simulate_partition_fit(
+  x,
+  ff,
+  ideal.para,
+  extra,
+  patition,
+  times,
+  trim,
+  enlarge,
+  scale,
+  details = TRUE
+)
 }
 \arguments{
 \item{x}{numeric. see \link{simulate_data}}
@@ -34,6 +44,7 @@ simulate_partition_fit(seq(0,270,30), f_AI2_out, ideal.para2 , extra2, 3,1,1/3, 
 
 }
 \seealso{
-Other simulate functions: \code{\link{simulate_data}}
+Other simulate functions: 
+\code{\link{simulate_data}()}
 }
 \concept{simulate functions}
