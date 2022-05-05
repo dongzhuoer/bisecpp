@@ -46,5 +46,10 @@
                 "document"
             ],
         },
+        {
+            "label": "deploy pkgdown",
+            "options": {"cwd": "${workspaceFolder}/docs"},
+            "command": "git add .; git commit -m 'rebuild pkgdown'; git push",
+        },
     ]
 }

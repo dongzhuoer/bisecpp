@@ -13,6 +13,8 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
+
+
 ```{r}
 library(bisecpp)
 library(ggplot2)

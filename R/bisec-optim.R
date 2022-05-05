@@ -111,7 +111,6 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' 1. value, numeric saclar. smallest function value found
 #' 2. para, numeric vector. best parameters.
 #' 3. space, numeric matrix. best solution space.
-#' @export
 #'
 #' @examples
 #' bisec_optim(sum, matrix(c(0,1,0,1,0,1), 3, byrow = T), 3, 10, 4, 1)
@@ -120,6 +119,7 @@ biosec_optim_impl <- function(fun, spaces, partition, trim, enlarge) {
 #' @section to do:
 #'     1. partition can be a integer vector, i.e. different parameter can be partitioned for different times
 #'
+#' @export
 bisec_optim <- function(fun, space, partition, times, trim, enlarge) {
 	# transform `space` to `spaces` which contains only one space, for consistency in the following loop
 	spaces <- array(space, dim = c(dim(space), 1));

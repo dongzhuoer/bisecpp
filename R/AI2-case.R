@@ -11,7 +11,6 @@
 #' NULL
 #'
 #' @export
-
 f_protein <- function(para, extra) {
 	function(x) {
 		extra[[2]]*exp(-para[[3]]*x)*(exp((extra[[1]] + para[[3]])*x) - 1)*(para[[1]] + para[[2]])/(extra[[1]] + para[[3]])
