@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/404.html</loc>
+  </url>
+  <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/articles/bisecpp.html</loc>
+  </url>
+  <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/authors.html</loc>
+  </url>
+  <url>
     <loc>https://dongzhuoer.github.io/bisecpp/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/news/index.html</loc>
   </url>
   <url>
     <loc>https://dongzhuoer.github.io/bisecpp/reference/R_square.html</loc>
@@ -28,6 +46,9 @@
     <loc>https://dongzhuoer.github.io/bisecpp/reference/f_protein.html</loc>
   </url>
   <url>
+    <loc>https://dongzhuoer.github.io/bisecpp/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://dongzhuoer.github.io/bisecpp/reference/reexports.html</loc>
   </url>
   <url>
@@ -35,8 +56,5 @@
   </url>
   <url>
     <loc>https://dongzhuoer.github.io/bisecpp/reference/simulate_partition_fit.html</loc>
-  </url>
-  <url>
-    <loc>https://dongzhuoer.github.io/bisecpp/articles/bisecpp.html</loc>
   </url>
 </urlset>
